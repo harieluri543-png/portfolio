@@ -2975,3 +2975,656 @@ CONTACT
     min-height: 350px;
      }
 }
+/* =====================================================
+   MOBILE-FRIENDLY ADD-ON
+   Paste this at the VERY END of your existing CSS file
+   (it must come last so it overrides earlier rules).
+   Also make sure your HTML <head> has:
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+===================================================== */
+
+
+/* ---------- Global safety ---------- */
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img,
+video,
+svg {
+    max-width: 100%;
+}
+
+a,
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Fixes a bug in the original: .skill-icon was defined twice
+   (About mini-cards and Skills cards), so About icons got the
+   big 75px Skills style. Scope the small version to About. */
+.about-skill-card .skill-icon {
+    min-width: 46px;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 800;
+    color: #ffffff;
+    background: linear-gradient(135deg, #9333ea, #c084fc);
+    border: 0;
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.25);
+}
+
+/* Fix: the page-wide purple glow is 650px wide and can cause
+   horizontal scroll on small screens */
+body::after {
+    max-width: 100vw;
+}
+
+
+/* =====================================================
+   LAPTOP / SMALL DESKTOP  (≤ 1100px)
+===================================================== */
+
+@media (max-width: 1100px) {
+
+    .hero {
+        gap: 40px;
+    }
+
+    .about-container {
+        gap: 50px;
+    }
+
+    .about-image-card {
+        width: 340px;
+        height: 450px;
+    }
+
+    .skills-container,
+    .projects-container,
+    .certifications-container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+
+/* =====================================================
+   TABLET  (≤ 900px)
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .navbar {
+        height: 70px;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 110px 5% 70px;
+    }
+
+    .hero-content {
+        max-width: 100%;
+    }
+
+    .about-section {
+        padding: 120px 6% 100px;
+    }
+
+    .about-skills {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about-text {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Skills / Projects / Certifications -> single column */
+    .skills-container,
+    .projects-container,
+    .certifications-container {
+        grid-template-columns: 1fr;
+        max-width: 700px;
+    }
+
+    .project-card.featured {
+        grid-column: auto;
+        grid-template-columns: 1fr;
+    }
+
+    .featured .project-image {
+        min-height: 250px;
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    /* Contact -> stacked */
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .contact-section,
+    .journey-section {
+        min-height: auto;
+        padding: 80px 5%;
+    }
+}
+
+
+/* =====================================================
+   LARGE PHONES / SMALL TABLETS  (≤ 768px)
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .skills-header,
+    .projects-header,
+    .certifications-header {
+        padding: 70px 20px 35px;
+    }
+
+    .skills-header p,
+    .projects-header p,
+    .certifications-header p {
+        font-size: 16px;
+    }
+
+    .journey-heading {
+        margin-bottom: 50px;
+    }
+
+    .contact-heading {
+        margin-bottom: 40px;
+    }
+
+    .contact-heading h2 {
+        font-size: 36px;
+    }
+}
+
+
+/* =====================================================
+   PHONES  (≤ 650px)
+===================================================== */
+
+@media (max-width: 650px) {
+
+    /* Leave room for the bottom nav bar + iPhone home indicator */
+    body {
+        padding-bottom: calc(86px + env(safe-area-inset-bottom, 0px));
+    }
+
+    /* ----- Navbar -----
+       Backdrop-filter on a parent traps fixed children, so it is
+       turned off here to let the links become a bottom tab bar. */
+    .navbar,
+    .navbar.light-section {
+        height: 64px;
+        padding: 0 16px;
+        background: rgba(10, 10, 18, 0.92);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
+    .logo {
+        font-size: 17px;
+    }
+
+    /* Links hidden in the original -> show as a bottom tab bar */
+    .nav-links {
+        display: flex;
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+        height: 56px;
+        padding: 0 6px;
+        gap: 0;
+        justify-content: space-between;
+
+        border-radius: 20px;
+        background: rgba(18, 17, 26, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+
+        z-index: 1100;
+    }
+
+    .nav-links li {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .nav-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 56px;
+        padding: 0 4px;
+
+        font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .nav-links a:active {
+        color: #c084fc;
+    }
+
+    .contact-btn {
+        padding: 10px 16px;
+        font-size: 12px;
+        gap: 8px;
+        min-height: 40px;
+    }
+
+    /* ----- Hero ----- */
+    .hero {
+        padding: 96px 20px 50px;
+        gap: 35px;
+    }
+
+    .hello-tag {
+        font-size: 12px;
+        padding: 8px 14px;
+    }
+
+    h1 {
+        font-size: clamp(44px, 15vw, 60px);
+        letter-spacing: -2px;
+        line-height: 1;
+    }
+
+    h2 {
+        font-size: clamp(20px, 6.4vw, 25px);
+    }
+
+    .description {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .hero-actions {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .resume-btn {
+        width: 100%;
+        height: 54px;
+        justify-content: center;
+    }
+
+    .social-btn {
+        width: 52px;
+        height: 52px;
+    }
+
+    .hero-image-container {
+        min-height: 0;
+        padding: 10px 0;
+    }
+
+    .profile-ring {
+        width: min(280px, 76vw);
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+
+    .image-glow {
+        width: min(300px, 80vw);
+        height: min(300px, 80vw);
+    }
+
+    /* Your original CSS made the photo a rounded square on phones
+       (border-radius: 30px) while the ring stayed a circle, so the
+       square's corners stuck out past the ring. Keep both circular. */
+    .profile-ring,
+    .profile-image {
+        border-radius: 50%;
+    }
+
+    .profile-image img {
+        border-radius: 50%;
+    }
+
+    /* ----- About ----- */
+    .about-section {
+        min-height: auto;
+        padding: 110px 5% 80px;
+    }
+
+    .about-image-wrapper {
+        min-height: 0;
+    }
+
+    .about-image-card {
+        width: min(300px, 78vw);
+        height: auto;
+        aspect-ratio: 4 / 5;
+        transform: rotate(-2deg);
+    }
+
+    .about-image-glow {
+        width: 240px;
+        height: 240px;
+    }
+
+    .about-content h1 {
+        font-size: clamp(38px, 12vw, 48px);
+        letter-spacing: -2px;
+    }
+
+    .about-text {
+        font-size: 15px;
+        line-height: 1.75;
+    }
+
+    .about-skills {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        text-align: left;
+    }
+
+    .about-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .about-btn {
+        justify-content: center;
+        min-height: 48px;
+    }
+
+    .about-star,
+    .about-wave,
+    .about-glow {
+        display: none;
+    }
+
+    /* ----- Skills ----- */
+    .skills-header h1,
+    .projects-header h1,
+    .certifications-header h1 {
+        font-size: clamp(34px, 11vw, 44px);
+        letter-spacing: -1px;
+    }
+
+    .skills-container,
+    .projects-container,
+    .certifications-container {
+        padding: 10px 16px 70px;
+        gap: 18px;
+    }
+
+    .skill-card,
+    .certificate-card {
+        padding: 22px;
+        gap: 18px;
+    }
+
+    .skill-content h2 {
+        font-size: 21px;
+    }
+
+    /* ----- Projects ----- */
+    .project-image,
+    .featured .project-image {
+        min-height: 180px;
+    }
+
+    .project-icon {
+        width: 80px;
+        height: 80px;
+        font-size: 38px;
+        border-radius: 22px;
+    }
+
+    .project-content {
+        padding: 22px;
+    }
+
+    .project-content h2 {
+        font-size: 23px;
+    }
+
+    .project-content p {
+        font-size: 14px;
+    }
+
+    .project-buttons {
+        flex-wrap: wrap;
+    }
+
+    .project-buttons a {
+        flex: 1;
+        text-align: center;
+        padding: 13px 16px;
+        min-height: 44px;
+    }
+
+    /* ----- Certifications ----- */
+    .certificate-content h2 {
+        font-size: 19px;
+    }
+
+    .certificate-btn {
+        padding: 12px 18px;
+        min-height: 44px;
+    }
+
+    /* ----- Journey ----- */
+    .journey-section {
+        padding: 70px 5%;
+    }
+
+    .journey-heading h2 {
+        font-size: 32px;
+    }
+
+    .journey-heading p {
+        letter-spacing: 3px;
+    }
+
+    .timeline-item {
+        padding-top: 14px;
+        padding-bottom: 14px;
+    }
+
+    .timeline-content {
+        padding: 20px;
+    }
+
+    .timeline-content h3 {
+        font-size: 22px;
+    }
+
+    .education-details {
+        flex-wrap: wrap;
+        gap: 8px 15px;
+    }
+
+    /* ----- Contact ----- */
+    .contact-section {
+        padding: 70px 5%;
+    }
+
+    .contact-heading h2 {
+        font-size: 32px;
+    }
+
+    .contact-card {
+        padding: 16px;
+        gap: 15px;
+    }
+
+    .contact-icon {
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+    }
+
+    .contact-card p,
+    .contact-card a {
+        overflow-wrap: anywhere;
+        font-size: 14px;
+    }
+
+    .contact-form {
+        padding: 20px;
+    }
+
+    /* 16px stops iOS Safari zooming in when a field is tapped */
+    .contact-form input,
+    .contact-form textarea {
+        font-size: 16px;
+    }
+
+    .contact-form button {
+        width: 100%;
+        min-height: 50px;
+    }
+}
+
+
+/* =====================================================
+   SMALL PHONES  (≤ 400px)
+===================================================== */
+
+@media (max-width: 400px) {
+
+    .navbar,
+    .navbar.light-section {
+        padding: 0 12px;
+    }
+
+    .logo {
+        font-size: 15px;
+    }
+
+    .contact-btn {
+        padding: 9px 12px;
+    }
+
+    .nav-links a {
+        font-size: 11px;
+    }
+
+    .hero {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .skill-card,
+    .certificate-card {
+        flex-direction: column;
+    }
+
+    .skill-icon,
+    .certificate-icon {
+        min-width: 60px;
+        width: 60px;
+        height: 60px;
+    }
+
+    .about-skill-card .skill-icon {
+        min-width: 46px;
+        width: 46px;
+        height: 46px;
+    }
+}
+
+
+/* =====================================================
+   SHORT / LANDSCAPE PHONES
+===================================================== */
+
+@media (max-height: 500px) and (orientation: landscape) {
+
+    .hero,
+    .about-section,
+    .journey-section,
+    .contact-section {
+        min-height: auto;
+    }
+
+    .hero {
+        padding-top: 90px;
+    }
+
+    .scroll-indicator {
+        display: none;
+    }
+}
+
+
+/* =====================================================
+   TOUCH DEVICES — no "stuck" hover states
+===================================================== */
+
+@media (hover: none) {
+
+    .skill-card:hover,
+    .project-card:hover,
+    .certificate-card:hover,
+    .about-skill-card:hover,
+    .contact-card:hover,
+    .timeline-content:hover,
+    .contact-btn:hover,
+    .resume-btn:hover,
+    .social-btn:hover,
+    .about-btn:hover,
+    .certificate-btn:hover,
+    .project-buttons a:hover,
+    .contact-form button:hover {
+        transform: none;
+    }
+
+    .about-image-card:hover {
+        transform: rotate(-3deg);
+    }
+
+    .profile-ring:hover .profile-image img {
+        transform: none;
+    }
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .timeline-item {
+        opacity: 1;
+        transform: none;
+    }
+}
